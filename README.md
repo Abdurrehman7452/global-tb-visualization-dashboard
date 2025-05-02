@@ -28,5 +28,3 @@ Data Source:
 - D3.js for charts
 - Pandas for data cleaning
 - Responsive iframe-based layout
-
-## 🛠️ How to Run
