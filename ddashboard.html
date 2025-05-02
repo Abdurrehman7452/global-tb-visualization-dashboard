@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TB Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ff6868; /* Set background color of body */
+        }
+
+        header {
+            background-color: #ce1c1c;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            font-size: 24px;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            /* Center aligns elements */
+            gap: 20px;
+            padding: 20px;
+            background-color: transparent; /* Ensure container does not inherit background color */
+        }
+
+        .iframe-container {
+            /* Updated sizes for larger divs */
+            flex: 1 1 48%;
+            /* Makes divs larger, ensuring Forced Directed and Sunburst appear next to each other */
+            max-width: 48%;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(235, 10, 10, 0.1);
+            background-color: white; /* Ensure divs have their own background */
+        }
+
+        .iframe-container.full-width {
+            flex: 1 1 100%;
+            /* Ensures full-width div for Line Chart, Map Chart, and Tree Map */
+            max-width: 100%;
+        }
+
+        iframe {
+            width: 100%;
+            height: 720px;
+            border: none;
+        }
+
+        @media (max-width: 768px) {
+            .iframe-container {
+                flex: 1 1 100%;
+                max-width: 100%;
+                /* Ensures responsiveness for small screens */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>TB Dashboard</h1>
+        <nav>
+            <button onclick="showIframe('forced')">Force-Directed Graph</button>
+            <button onclick="showIframe('linechart')">Line Chart</button>
+            <button onclick="showIframe('mapchart')">Map Chart</button>
+            <button onclick="showIframe('treemap')">TreeMap</button>
+            <button onclick="showIframe('sunburst')">Sunburst</button>
+            <button onclick="refreshPage()">All</button>
+            <script>
+                function refreshPage() {
+                    location.reload();
+                }
+            </script>
+        </nav>
+    </header>
+    <div class="container">
+        <!-- Forced Directed and Sunburst together -->
+        <div class="iframe-container" id="forced">
+            <iframe src="forceddirected.html" title="Force-Directed Graph"></iframe>
+        </div>
+        <div class="iframe-container" id="sunburst">
+            <iframe src="sunburst.html" title="Sunburst Visualization"></iframe>
+        </div>
+
+        <!-- Line Chart full width -->
+        <div class="iframe-container full-width" id="linechart">
+            <iframe src="timeline.html" title="Line Chart Visualization"></iframe>
+        </div>
+
+        <!-- Map Chart full width -->
+        <div class="iframe-container full-width" id="mapchart">
+            <iframe src="mapchart.html" title="Map Chart Visualization"></iframe>
+        </div>
+
+        <!-- Tree Map full width -->
+        <div class="iframe-container full-width" id="treemap">
+            <iframe src="treemap.html" title="TreeMap Visualization"></iframe>
+        </div>
+    </div>
+    <script>
+        function showIframe(id) {
+            const iframes = document.querySelectorAll('.iframe-container');
+            iframes.forEach(iframe => iframe.style.display = 'none');
+            document.getElementById(id).style.display = 'block';
+        }
+    </script>
+</body>
+
+</html>
